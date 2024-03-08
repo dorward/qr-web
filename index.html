@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>QR Code Generator</title>
+		<style>
+			body {
+				font-size: 18px;
+				text-align: center;
+				max-width: 500px;
+				margin: auto;
+				font-family: Candara, Calibri, Segoe, Segoe UI, Optima, Arial, sans-serif
+
+			h1 {
+				font-family: Century Gothic, CenturyGothic, AppleGothic, sans-serif
+			}
+
+			textarea,
+			input {
+				width: 300px;
+			}
+
+			#out {
+				margin-top: 1em;
+			}
+
+			img {
+				border: solid #ffb496 1px;
+			}
+
+			p {
+				text-align: left;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>QR Code Generator</h1>
+		<label>
+			Text to encode
+			<br />
+			<textarea autocomplete="none"></textarea>
+		</label>
+		<br />
+		<label>
+			Image size
+			<br>
+			<input type="number" value="150" />
+		</label>
+		<div id="out"></div>
+
+		<hr />
+
+		<p>This is designed to be an ultra simple, completely free, QR Code generator which doesn't try to do anything sneaky, underhand, or profit making. It is a light UI wrapper around <a href="https://www.npmjs.com/package/qrcode">this qrcode library</a></p>
+
+		<p>There are two controls. A textarea where you type some text, and a number box where you can adjust the size of the rendered image. When you are happy with the result you can use your browser to save the result (typically by right-clicking on the image and selecting Save).</p>
+
+		<p>It runs entirely in your browser. It does not send any information about what you type to me.</p>
+
+		<p>It encodes exactly what you put in the text field. It doesn't set up a redirect though this website. This means it doesn't provide a service to tell you how many people have used it, and it isn't a GDRP violation waiting to be spotted. It will just work and it won't expire. I won't (and can't) try to charge you money to keep your QR code running (because it points to exactly where you tell it to and not to my site).</p>
+
+
+			<script type="module">
+				import QRCode from 'https://cdn.jsdelivr.net/npm/qrcode@latest/+esm';
+
+				const createImage = () => {
+					const img = document.createElement('img');
+					document.querySelector('#out').appendChild(img);
+					return img;
+				};
+
+				const gen = async e => {
+					const value = document.querySelector('textarea').value;
+					const width = +document.querySelector('input').value;
+					const output = await QRCode.toDataURL(value || ' ', { width });
+					console.log(value, width, output);
+					image.src = output;
+					image.alt = value;
+				};
+
+				const image = createImage();
+				gen();
+
+				document.querySelectorAll('textarea, input').forEach(el => el.addEventListener('input', gen));
+			</script>
+		</p>
+	</body>
+</html>
