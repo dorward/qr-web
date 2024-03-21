@@ -4,6 +4,7 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>QR Code Generator</title>
+		<meta name="description" content="A free, privacy focused QR Code generator that runs in your browser." />
 		<link
 			rel="icon"
 			href="data:image/png;base64,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"
@@ -31,6 +32,7 @@
 
 			#out {
 				margin-top: 1em;
+				min-height: 155px;
 			}
 
 			img {
@@ -148,6 +150,8 @@
 
 			const createImage = () => {
 				const img = document.createElement('img');
+				img.height = 150;
+				img.width = 150;
 				document.querySelector('#out').appendChild(img);
 				return img;
 			};
@@ -156,9 +160,10 @@
 				const value = document.querySelector('textarea').value;
 				const width = +document.querySelector('input').value;
 				const output = await QRCode.toDataURL(value || ' ', { width });
-				console.log(value, width, output);
 				image.src = output;
 				image.alt = value;
+				image.height = width;
+				image.width = width;
 			};
 
 			const image = createImage();
